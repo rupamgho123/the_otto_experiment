@@ -1,4 +1,5 @@
 # the_otto_experiment
 a demo app showcasing otto capabilities
-
-[![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](http://www.youtube.com/watch?v=T-D1KVIuvjA)
+Otto is an android library for building loosely coupled android apps using event bus communication
+using a centralized event bus
+Details of otto project can be found here(https://github.com/square/otto)
