@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
@@ -17,7 +18,7 @@ import butterknife.OnClick;
 public class OneFragment extends BaseFragment {
 
     @Bind(R.id.button1)
-    Button button;
+    TextView button;
 
     int count;
 
@@ -49,7 +50,7 @@ public class OneFragment extends BaseFragment {
 
     @Subscribe
     public void fragmentTwoButtonClicked(FragmentTwoButtonClickEvent event) {
-        button.setText("Fragment2 click count: " + event.getCount());
+        button.setText(String.format("Received from Fragment2 click count: %d", event.getCount()));
     }
 
 }

@@ -1,22 +1,32 @@
 package com.example.ottoexperiment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+
 public class MainActivity extends BaseActivity {
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+
+    Toolbar toolbar;
+
+    TabLayout tabLayout;
+
+    ViewPager viewPager;
+
+    FloatingActionButton fabButton;
 
     private int clickCount;
 
@@ -24,7 +34,11 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,6 +49,14 @@ public class MainActivity extends BaseActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        fabButton = (FloatingActionButton) findViewById(R.id.fab);
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BusProvider.getInstance().post(new FabClickEvent());
+            }
+        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -46,14 +68,22 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe
     public void dataReceivedFromFragmentOne(FragmentOneButtonClickEvent event) {
-        clickCount++;
-        getSupportActionBar().setTitle("Count: " + clickCount);
+        updateTitle();
     }
 
     @Subscribe
     public void dataReceivedFromFragmentTwo(FragmentTwoButtonClickEvent event) {
+        updateTitle();
+    }
+
+    @Subscribe
+    public void fabClickEventReceived(FabClickEvent event){
+        updateTitle();
+    }
+
+    private void updateTitle(){
         clickCount++;
-        getSupportActionBar().setTitle("Count: " + clickCount);
+        getSupportActionBar().setTitle(String.format("Total Click Count: %d", clickCount));
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

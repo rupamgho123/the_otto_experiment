@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">OttoExperiment</string>
-    <string name="one">one</string>
-    <string name="two">two</string>
+    <string name="one">Click me!!</string>
+    <string name="two">Click me!!</string>
 </resources>

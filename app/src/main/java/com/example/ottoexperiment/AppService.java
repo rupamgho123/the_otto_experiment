@@ -23,12 +23,18 @@ public class AppService extends BaseService {
     @Subscribe
     public void dataReceivedFromFragmentOne(FragmentOneButtonClickEvent event) {
         clickCount++;
-        Toast.makeText(this, "Received in Service click count: " + clickCount, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.format("Received in Service click count: %d", clickCount), Toast.LENGTH_SHORT).show();
     }
 
     @Subscribe
     public void dataReceivedFromFragmentTwo(FragmentTwoButtonClickEvent event) {
         clickCount++;
-        Toast.makeText(this, "Received in Service click count: " + clickCount, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.format("Received in Service click count: %d", clickCount), Toast.LENGTH_SHORT).show();
+    }
+
+    @Subscribe
+    public void fabClickEventReceived(FabClickEvent event){
+        clickCount++;
+        Toast.makeText(this, String.format("Received in Service fab click event count: %d", clickCount), Toast.LENGTH_SHORT).show();
     }
 }

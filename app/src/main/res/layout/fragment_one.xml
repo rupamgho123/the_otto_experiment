@@ -5,7 +5,8 @@
                 android:layout_height="match_parent"
                 tools:context="info.androidhive.materialtabs.fragments.OneFragment">
 
-    <Button
+    <TextView
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button1"
