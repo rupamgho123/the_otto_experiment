@@ -16,8 +16,6 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-
 public class MainActivity extends BaseActivity {
 
     Toolbar toolbar;
@@ -55,6 +53,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 BusProvider.getInstance().post(new FabClickEvent());
+                BusProvider.getInstance().post(Integer.valueOf(clickCount));
             }
         });
     }
@@ -64,6 +63,11 @@ public class MainActivity extends BaseActivity {
         adapter.addFragment(new OneFragment(), "ONE");
         adapter.addFragment(new TwoFragment(), "TWO");
         viewPager.setAdapter(adapter);
+    }
+
+    @Subscribe
+    public void dataReceivedAsInt(Integer count){
+        Toast.makeText(this,""+count,Toast.LENGTH_SHORT).show();
     }
 
     @Subscribe
